@@ -25,7 +25,7 @@ This tool has been specifically designed to work with
 [Piotr Murach's FiniteMachine](https://github.com/piotrmurach/finite_machine)
 but is not limited to that environment.
 
-When building state matchine, I regularly find that state needs to move in a sequence of
+When building state matchines, I regularly find that state needs to move in a sequence of
 steps. For example, `:one` to `:two` to `three`. In FiniteMachine, to achieve that you
 can do this:
 
@@ -54,12 +54,12 @@ That is OK, but gets a little unwieldy as the sequence grows or when you want to
 sequences depending on a condition.
 
 WorkflowToHash allow me to create state sequences more easily. For example, to achieve
-the above I would:
+the above I could:
 
 ```ruby
 class Workflow < WorkflowToHash::Workflow
   def forward
-    [start, :one, :two, :three]
+    [:start, :one, :two, :three]
   end
 
   def backward
@@ -88,7 +88,7 @@ sm.next
 sm.state # --> :three
 ```
 
-It also allows me to build more complex state machines succinctly:
+And the it allows me to build more complex state machines succinctly:
 
 ```ruby
 
