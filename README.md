@@ -30,6 +30,7 @@ steps. For example, `:one` to `:two` to `three`. In FiniteMachine, to achieve th
 can do this:
 
 ```ruby
+require 'finite_machine'
 class StateMachine < FiniteMachine::Definition
   initial :one
 
@@ -57,6 +58,9 @@ WorkflowToHash allow me to create state sequences more easily. For example, to a
 the above I could:
 
 ```ruby
+require 'finite_machine'
+require 'workflow_to_hash'
+
 class Workflow < WorkflowToHash::Workflow
   def forward
     [:start, :one, :two, :three]
@@ -88,7 +92,7 @@ sm.next
 sm.state # --> :three
 ```
 
-And the it allows me to build more complex state machines succinctly:
+And then it allows me to build more complex state machines succinctly:
 
 ```ruby
 
@@ -99,10 +103,10 @@ class StateMachine < FiniteMachine::Definition
     event(
       :next,
       Workflow.for(:forward).merge(if: -> {target.forward})
-    ),
+    )
     event(
       :next,
-      Workflow.for(:backward).merge(if: -> {!target.forward)
+      Workflow.for(:backward).merge(if: -> {!target.forward})
     )
   }
 end
